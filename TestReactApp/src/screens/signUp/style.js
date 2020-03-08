@@ -1,41 +1,62 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-    container: {
-      flexDirection: 'column',
-      justifyContent: 'center',
-      backgroundColor: 'white',
-      paddingHorizontal: 5,
-      flex: 1
-    },
-    textLabel: {
-      fontSize: 20,
-      marginTop: 10,
-      padding: 10
-    },
-    textInput: {
-      height: 40,
-      width: 300,
-      margin: 10,
-      color: 'tomato',
-      fontSize: 15,
-      borderWidth: 2,
-      borderRadius: 5
-    },
-    button: {
-      backgroundColor: 'gray',
-      width: 150,
-      height: 40,
-      borderRadius: 5,
-      alignSelf: 'center'
-    },
-    error: {
-      fontSize: 15,
-      color: 'blue',
-      marginVertical: 0,
-      paddingLeft: 10,
-      fontWeight: 'bold'
-    }
-  });
+  container: {
+    flex: 1,
+  },
+  greeting: {
+    marginTop: 32,
+    marginLeft: 32,
+    flexDirection: 'row'
+  },
+  greeting_signUp: {
+    fontSize: 32,
+    flex: 1,
+    color: '#0039cb',
+    textAlign:'center'
+  },
+  greeting_signIn: {
+    marginTop: 12,
+    marginRight: 32,
+    color: '#8A8F9E',
+    fontSize: 20
+  },
+  errorMessage: {
+    height: 72,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginHorizontal: 30
+  },
+  error: {
+    color: '#E9446A',
+    fontSize: 13,
+    fontWeight: '600',
+    textAlign: 'center'
+  },
+  form: {
+    marginBottom: 48,
+    marginHorizontal: 30
+  },
+  inputTitle: {
+    color: '#8A8F9E',
+    fontSize: 10,
+    textTransform: 'uppercase'
+  },
+  input: {
+    borderBottomColor: '#8A8F9E',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    height: 40,
+    fontSize: 15,
+    color: '#161F3D'
+  },
+  button: {
+    margin: 30,
+    backgroundColor: '#2962ff',
+    borderRadius: 4,
+    height: 52,
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
+});
 
-  export default styles;
+export default styles;

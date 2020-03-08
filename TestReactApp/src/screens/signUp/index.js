@@ -1,107 +1,69 @@
 import React from 'react';
-import { Text, TextInput, KeyboardAvoidingView, ScrollView, Button } from 'react-native';
-// import { connect } from 'react-redux';
-import styles from './style';
+import {
+    Text,
+    View,
+    TextInput,
+    TouchableOpacity
+} from 'react-native';
+import styles from './style'
+import * as firebase from 'firebase'
 
-export default class Signup extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            email: '',
-            password1: '',
-            password2: '',
-            error: ''
-        };
-        this.handleChangeEmail = this.handleChangeEmail.bind(this);
-        this.handleChangePassword1 = this.handleChangePassword1.bind(this);
-        this.handleChangePassword2 = this.handleChangePassword2.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+
+export default class SignInScreen extends React.Component {
+    state = {
+        email: '',
+        password: '',
+        errorMessage: null
     }
-
-    handleChangeEmail(value) {
-        this.setState({ email: value });
+    handleRegister = () => {
+        const { email, password } = this.state;
+        firebase.auth().createUserWithEmailAndPassword(email, password).catch(error => this.setState({ errorMessage: error.message }))
     }
-
-    handleChangePassword1(value) {
-        this.setState({ password1: value });
-    }
-
-    handleChangePassword2(value) {
-        this.setState({ password2: value });
-    }
-
-    handleSubmit() {
-        if (this.state.email && this.state.password1 && this.state.password1 === this.state.password2) {
-            const email = this.state.email;
-            const password = this.state.password1;
-            this.props.signup({
-                email,
-                password
-            }, this.props.navigation);
-            // clear the state after signup for security
-            this.setState({
-                email: '',
-                password1: '',
-                password2: '',
-                error: ''
-            });
-        } else {
-            this.setState({
-                password1: '',
-                password2: '',
-                error: 'Email and password cannot be empty.  Passwords must also match.'
-            });
-        }
-    }
-
     render() {
         return (
-            
-            <KeyboardAvoidingView behavior="position" style={styles.container}>
-                <ScrollView>
-                    <Text style={styles.error}>{this.state.error}</Text>
-                    <Text style={styles.textLabel}>Enter a Email</Text>
-                    <TextInput
-                        style={styles.textInput}
-                        autoCapitalize="none"
-                        autoCorrect={false}
-                        maxLength={15}
-                        value={this.state.email}
-                        onChangeText={(email) => this.handleChangeEmail(email)}
-                    />
-                    <Text style={styles.textLabel}>Enter a Password</Text>
-                    <TextInput
-                        style={styles.textInput}
-                        secureTextEntry={true}
-                        autoCapitalize="none"
-                        autoCorrect={false}
-                        maxLength={15}
-                        value={this.state.password1}
-                        onChangeText={(password1) => this.handleChangePassword1(password1)}
-                    />
-                    <Text style={styles.textLabel}>Confirm Password</Text>
-                    <TextInput
-                        style={styles.textInput}
-                        secureTextEntry={true}
-                        autoCapitalize="none"
-                        autoCorrect={false}
-                        maxLength={15}
-                        value={this.state.password2}
-                        onChangeText={(password2) => this.handleChangePassword2(password2)}
-                    />
-                    <Button
-                        buttonStyle={styles.button}
-                        title="Sign Up"
-                        onPress={this.handleSubmit}
-                    />
-                </ScrollView>
-            </KeyboardAvoidingView>
-  );
+            <View style={styles.container}>
+                <View style={styles.greeting}>
+                    <TouchableOpacity style={styles.greeting_signIn} onPress={() => this.props.navigation.navigate('SignIn')}>
+                        <Text style={{
+                            color: '#8A8F9E',
+                            fontSize: 20
+                        }}>Вход</Text>
+                    </TouchableOpacity>
+                    <Text style={styles.greeting_signUp}>Регистрация</Text>
+                </View>
+
+                <View style={styles.errorMessage}>
+                    {this.state.errorMessage && <Text style={styles.error}>{this.state.errorMessage}</Text>}
+                </View>
+
+                <View style={styles.form}>
+                    <View>
+                        <Text style={styles.inputTitle}>Email</Text>
+                        <TextInput
+                            style={styles.input}
+                            autoCopitalize='none'
+                            onChangeText={email => this.setState({ email: email })}
+                            value={this.state.email}
+                        />
+                    </View>
+                    <View style={{ marginTop: 32 }}>
+                        <Text style={styles.inputTitle}>Пароль</Text>
+                        <TextInput
+                            style={styles.input}
+                            secureTextEntry
+                            autoCopitalize='none'
+                            onChangeText={password => this.setState({ password: password })}
+                            value={this.state.password}
+                        />
+                    </View>
+                </View>
+
+                <TouchableOpacity style={styles.button} onPress={this.handleRegister}>
+                    <Text style={{ color: '#FFF', fontWeight: '500' }}>Регистрация</Text>
+                </TouchableOpacity>
+
+            </View >
+        )
     }
 }
 
-// const mapDispatchToProps = (dispatch) => ({
-//   signup: (credentials, navigation) => dispatch(signup(credentials, navigation))
-// });
-
-// export default connect(null, mapDispatchToProps)(Signup);
