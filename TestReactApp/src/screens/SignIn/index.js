@@ -75,13 +75,15 @@ export class SignInScreen extends React.Component {
 
           </View>
         </View>
-
-        <Text style={{ color: '#8A8F9E', fontSize: 15, textAlign: 'center' }}>
-          Еще не зарегистрированы?
+        <View>
+          <Text style={{ color: '#8A8F9E', fontSize: 15, textAlign: 'center' }}>
+            Еще не зарегистрированы?
             </Text>
-        <TouchableOpacity style={{ alignSelf: 'center' }} onPress={() => this.props.navigation.navigate('SignUp')}>
-          <Text style={{ fontWeight: '500', color: '#2962ff' }}>Регистрация</Text>
-        </TouchableOpacity>
+          <TouchableOpacity style={{ alignSelf: 'center' }} onPress={() => this.props.navigation.navigate('SignUp')}>
+            <Text style={{ fontSize: 15, color: '#2962ff' }}>Регистрация</Text>
+          </TouchableOpacity>
+        </View>
+
 
         <TouchableOpacity style={styles.button} onPress={this.handleLogin}>
           <Text style={{ color: '#FFF', fontWeight: '500' }}>Войти</Text>

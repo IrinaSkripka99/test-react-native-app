@@ -7,19 +7,21 @@ import {
 } from 'react-native';
 import styles from './style'
 import * as firebase from 'firebase'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import { setEmail, setPassword } from '../../components/store/actions'
 
 
-export default class SignUpScreen extends React.Component {
+export class SignUpScreen extends React.Component {
     state = {
-        email: '',
-        password: '',
         errorMessage: null
     }
     handleRegister = () => {
-        const { email, password } = this.state;
+        const { email, password } = this.props;
         firebase.auth().createUserWithEmailAndPassword(email, password).catch(error => this.setState({ errorMessage: error.message }))
     }
     render() {
+        const { email, password, setEmail, setPassword } = this.props;
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
@@ -52,8 +54,8 @@ export default class SignUpScreen extends React.Component {
                         <TextInput
                             style={styles.input}
                             autoCopitalize='none'
-                            onChangeText={email => this.setState({ email: email })}
-                            value={this.state.email}
+                            onChangeText={email => setEmail(email)}
+                            value={email}
                         />
                     </View>
                     <View style={{ marginTop: 32 }}>
@@ -62,13 +64,23 @@ export default class SignUpScreen extends React.Component {
                             style={styles.input}
                             secureTextEntry
                             autoCopitalize='none'
-                            onChangeText={password => this.setState({ password: password })}
-                            value={this.state.password}
+                            onChangeText={password => setPassword(password)}
+                            value={password}
                         />
+
                     </View>
                 </View>
+                <View >
+                    <Text style={{ color: '#8A8F9E', fontSize: 15, textAlign: 'center' }}>
+                        Я согласен с  
+            </Text>
+                    <TouchableOpacity style={{ alignSelf: 'center' }} onPress={() => this.props.navigation.navigate('SignUp')}>
+                        <Text style={{ fontSize: 15, color: '#2962ff' }}>Политикой конфиденциальности</Text>
+                    </TouchableOpacity>
+                </View>
 
-                <TouchableOpacity style={styles.button} onPress={this.handleRegister}>
+
+                <TouchableOpacity style={styles.button} onPress={this.handleRegister} disabled={true}>
                     <Text style={{ color: '#FFF', fontWeight: '500' }}>Регистрация</Text>
                 </TouchableOpacity>
 
@@ -77,3 +89,16 @@ export default class SignUpScreen extends React.Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        email: state.email,
+        password: state.password
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setEmail: bindActionCreators(setEmail, dispatch),
+        setPassword: bindActionCreators(setPassword, dispatch)
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpScreen);

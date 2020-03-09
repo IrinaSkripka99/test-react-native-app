@@ -12,5 +12,5 @@ export const rootReducer = (state = initialState, action) => {
     case ACTION_SET_PASSWORD:
       return { ...state, password: action.payload }
   }
-  return state;
+  return state
 }
