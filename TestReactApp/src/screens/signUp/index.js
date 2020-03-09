@@ -22,6 +22,16 @@ export default class SignInScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
+                <View style={styles.header}>
+                    <View style={styles.logo}>
+                        <Text style={{ color: '#ffff56', fontSize: 42 }}>L</Text>
+                        <Text style={{ color: '#fffde7', fontSize: 42 }}>F</Text>
+                    </View>
+                    <View >
+                        <Text style={{ color: '#ffff56', fontSize: 17 }}>потерял</Text>
+                        <Text style={{ color: '#fffde7', fontSize: 17 }}>нашел</Text>
+                    </View>
+                </View>
                 <View style={styles.greeting}>
                     <TouchableOpacity style={styles.greeting_signIn} onPress={() => this.props.navigation.navigate('SignIn')}>
                         <Text style={{

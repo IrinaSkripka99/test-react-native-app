@@ -20,6 +20,17 @@ const styles = StyleSheet.create({
         marginRight: 32,
         flex: 1
     },
+    header: {
+        backgroundColor: '#5870cb',
+        height: 80,
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'row'
+    },
+    logo: {
+        flexDirection: 'row',
+        marginRight:7
+    },
     errorMessage: {
         height: 72,
         alignItems: 'center',
@@ -51,7 +62,7 @@ const styles = StyleSheet.create({
     button: {
         margin: 30,
         backgroundColor: '#2962ff',
-        borderRadius: 4,
+        borderRadius: 40,
         height: 52,
         alignItems: 'center',
         justifyContent: 'center'

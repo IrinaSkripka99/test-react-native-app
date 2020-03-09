@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     fontSize: 32,
     flex: 1,
     color: '#0039cb',
-    textAlign:'center'
+    textAlign: 'center'
   },
   greeting_signIn: {
     marginTop: 12,
@@ -52,11 +52,22 @@ const styles = StyleSheet.create({
   button: {
     margin: 30,
     backgroundColor: '#2962ff',
-    borderRadius: 4,
+    borderRadius: 40,
     height: 52,
     alignItems: 'center',
     justifyContent: 'center'
-  }
+  },
+  header: {
+    backgroundColor: '#5870cb',
+    height: 80,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row'
+  },
+  logo: {
+    flexDirection: 'row',
+    marginRight: 7
+  },
 });
 
 export default styles;
