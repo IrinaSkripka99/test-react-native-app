@@ -6,22 +6,28 @@ import {
   TouchableOpacity
 } from 'react-native';
 import styles from './style';
+import * as firebase from 'firebase';
+import { Icon } from 'react-native-vector-icons';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import { setEmail, setPassword } from '../../components/store/actions'
-import * as firebase from 'firebase';
 
 export const ACTION_SET_EMAIL = 'ACTION_SET_EMAIL';
 export const ACTION_SET_PASSWORD = 'ACTION_SET_PASSWORD';
 
-export class SignInScreen extends React.Component {
+export default class SignInScreen extends React.Component {
   state = {
-    errorMessage: null
+    errorMessage: null,
+    showPassword: false
   }
 
   handleLogin = () => {
     const { email, password } = this.props;
     firebase.auth().signInWithEmailAndPassword(email, password).catch(error => this.setState({ errorMessage: error.message }))
+  }
+
+  showPass = () => {
+    this.setState({ showPassword: true })
   }
 
   render() {
@@ -59,7 +65,7 @@ export class SignInScreen extends React.Component {
             <TextInput
               style={styles.input}
               autoCopitalize='none'
-              onChangeText={email => setEmail(email)}
+              onChangeText={(event) => setEmail(event.target.value)}
               value={email}
             />
           </View>
@@ -67,15 +73,18 @@ export class SignInScreen extends React.Component {
             <Text style={styles.inputTitle}>Пароль</Text>
             <TextInput
               style={styles.input}
-              secureTextEntry
+              secureTextEntry={this.state.showPassword}
               autoCopitalize='none'
-              onChangeText={password => setPassword(password)}
+              onChangeText={(event) => setPassword(event.target.value)}
               value={password}
             />
-
+            <Icon
+              name="eyeo"
+              // onPress={this.showPass}
+              >
+            </Icon>
           </View>
         </View>
-
         <Text style={{ color: '#8A8F9E', fontSize: 15, textAlign: 'center' }}>
           Еще не зарегистрированы?
             </Text>
@@ -86,7 +95,6 @@ export class SignInScreen extends React.Component {
         <TouchableOpacity style={styles.button} onPress={this.handleLogin}>
           <Text style={{ color: '#FFF', fontWeight: '500' }}>Войти</Text>
         </TouchableOpacity>
-
       </View>
     )
   }
@@ -97,10 +105,9 @@ const mapStateToProps = (state) => {
     password: state.password
   }
 }
-const mapDispatchToProps = (dispatch) => {
+const mapActionsToProps = (dispatch) => {
   return {
     setEmail: bindActionCreators(setEmail, dispatch),
     setPassword: bindActionCreators(setPassword, dispatch)
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(SignInScreen);

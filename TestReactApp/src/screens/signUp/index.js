@@ -9,7 +9,7 @@ import styles from './style'
 import * as firebase from 'firebase'
 
 
-export default class SignInScreen extends React.Component {
+export default class SignUpScreen extends React.Component {
     state = {
         email: '',
         password: '',
