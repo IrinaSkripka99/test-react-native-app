@@ -70,17 +70,7 @@ export class SignUpScreen extends React.Component {
 
                     </View>
                 </View>
-                <View >
-                    <Text style={{ color: '#8A8F9E', fontSize: 15, textAlign: 'center' }}>
-                        Я согласен с  
-            </Text>
-                    <TouchableOpacity style={{ alignSelf: 'center' }} onPress={() => this.props.navigation.navigate('SignUp')}>
-                        <Text style={{ fontSize: 15, color: '#2962ff' }}>Политикой конфиденциальности</Text>
-                    </TouchableOpacity>
-                </View>
-
-
-                <TouchableOpacity style={styles.button} onPress={this.handleRegister} disabled={true}>
+                <TouchableOpacity style={styles.button} onPress={this.handleRegister} >
                     <Text style={{ color: '#FFF', fontWeight: '500' }}>Регистрация</Text>
                 </TouchableOpacity>
 

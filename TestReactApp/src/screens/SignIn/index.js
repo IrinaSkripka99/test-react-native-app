@@ -72,7 +72,9 @@ export class SignInScreen extends React.Component {
               onChangeText={password => setPassword(password)}
               value={password}
             />
-
+            <TouchableOpacity>
+              <View style={styles.eye}/>
+            </TouchableOpacity>
           </View>
         </View>
         <View>

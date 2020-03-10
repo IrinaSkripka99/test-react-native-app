@@ -29,7 +29,10 @@ const styles = StyleSheet.create({
     },
     logo: {
         flexDirection: 'row',
-        marginRight:7
+        marginRight: 7
+    },
+    eye: {
+        backgroundColor:'black'
     },
     errorMessage: {
         height: 72,
